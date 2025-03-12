@@ -1,0 +1,15 @@
+# This is a generated file; do not edit or check into version control.
+flutter_plugin_android_lifecycle=/Users/keremtegiz/.pub-cache/hosted/pub.dev/flutter_plugin_android_lifecycle-2.0.27/
+local_auth=/Users/keremtegiz/.pub-cache/hosted/pub.dev/local_auth-2.3.0/
+local_auth_android=/Users/keremtegiz/.pub-cache/hosted/pub.dev/local_auth_android-1.0.48/
+local_auth_darwin=/Users/keremtegiz/.pub-cache/hosted/pub.dev/local_auth_darwin-1.4.3/
+local_auth_windows=/Users/keremtegiz/.pub-cache/hosted/pub.dev/local_auth_windows-1.0.11/
+notification_permissions=/Users/keremtegiz/.pub-cache/hosted/pub.dev/notification_permissions-0.6.1/
+path_provider_linux=/Users/keremtegiz/.pub-cache/hosted/pub.dev/path_provider_linux-2.2.1/
+path_provider_windows=/Users/keremtegiz/.pub-cache/hosted/pub.dev/path_provider_windows-2.3.0/
+shared_preferences=/Users/keremtegiz/.pub-cache/hosted/pub.dev/shared_preferences-2.5.2/
+shared_preferences_android=/Users/keremtegiz/.pub-cache/hosted/pub.dev/shared_preferences_android-2.4.8/
+shared_preferences_foundation=/Users/keremtegiz/.pub-cache/hosted/pub.dev/shared_preferences_foundation-2.5.4/
+shared_preferences_linux=/Users/keremtegiz/.pub-cache/hosted/pub.dev/shared_preferences_linux-2.4.1/
+shared_preferences_web=/Users/keremtegiz/.pub-cache/hosted/pub.dev/shared_preferences_web-2.4.3/
+shared_preferences_windows=/Users/keremtegiz/.pub-cache/hosted/pub.dev/shared_preferences_windows-2.4.1/
