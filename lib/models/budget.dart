@@ -4,7 +4,7 @@ class Budget {
   final String id;
   final String category;
   final double limit;
-  double spent;
+  final double spent;
   final DateTime startDate;
   final DateTime endDate;
 
@@ -20,6 +20,24 @@ class Budget {
   double get remainingAmount => limit - spent;
   double get spentPercentage => (spent / limit) * 100;
   bool get isOverBudget => spent > limit;
+
+  Budget copyWith({
+    String? id,
+    String? category,
+    double? limit,
+    double? spent,
+    DateTime? startDate,
+    DateTime? endDate,
+  }) {
+    return Budget(
+      id: id ?? this.id,
+      category: category ?? this.category,
+      limit: limit ?? this.limit,
+      spent: spent ?? this.spent,
+      startDate: startDate ?? this.startDate,
+      endDate: endDate ?? this.endDate,
+    );
+  }
 
   Map<String, dynamic> toJson() {
     return {
@@ -41,37 +59,5 @@ class Budget {
       startDate: DateTime.parse(json['startDate']),
       endDate: DateTime.parse(json['endDate']),
     );
-  }
-}
-
-class BudgetProvider with ChangeNotifier {
-  List<Budget> _budgets = [];
-
-  List<Budget> get budgets => [..._budgets];
-
-  void addBudget(Budget budget) {
-    _budgets.add(budget);
-    notifyListeners();
-  }
-
-  void deleteBudget(String id) {
-    _budgets.removeWhere((budget) => budget.id == id);
-    notifyListeners();
-  }
-
-  void updateBudget(String id, double amount) {
-    final budgetIndex = _budgets.indexWhere((b) => b.id == id);
-    if (budgetIndex >= 0) {
-      _budgets[budgetIndex].spent += amount;
-      notifyListeners();
-    }
-  }
-
-  double getTotalSpent() {
-    return _budgets.fold(0, (sum, budget) => sum + budget.spent);
-  }
-
-  double getTotalBudget() {
-    return _budgets.fold(0, (sum, budget) => sum + budget.limit);
   }
 } 

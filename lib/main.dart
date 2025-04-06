@@ -1,57 +1,61 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'screens/home_screen.dart';
-import 'screens/transactions_screen.dart';
 import 'screens/settings_screen.dart';
 import 'screens/budget_screen.dart';
+import 'screens/transaction_form_screen.dart';
 import 'models/budget.dart';
+import 'providers/budget_provider.dart';
+import 'providers/transaction_provider.dart';
 
 void main() {
-  runApp(
-    MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (_) => BudgetProvider()),
-      ],
-      child: const FinTrackApp(),
-    ),
-  );
+  runApp(const MyApp());
 }
 
-class FinTrackApp extends StatelessWidget {
-  const FinTrackApp({super.key});
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'FinTrack',
-      theme: ThemeData(
-        useMaterial3: true,
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: const Color(0xFF1D5C42),
-          brightness: Brightness.light,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => TransactionProvider()),
+        ChangeNotifierProvider(create: (_) => BudgetProvider()),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'FinTrack',
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(
+            seedColor: const Color(0xFF1D5C42),
+            brightness: Brightness.light,
+          ),
+          useMaterial3: true,
+          textTheme: GoogleFonts.poppinsTextTheme(),
+          cardTheme: CardTheme(
+            elevation: 4,
+            margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+          ),
+          appBarTheme: const AppBarTheme(
+            elevation: 0,
+            centerTitle: true,
+            backgroundColor: Colors.transparent,
+          ),
+          bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+            elevation: 8,
+            selectedItemColor: Color(0xFF1D5C42),
+            unselectedItemColor: Colors.grey,
+            type: BottomNavigationBarType.fixed,
+            backgroundColor: Colors.white,
+            selectedIconTheme: IconThemeData(size: 28),
+            unselectedIconTheme: IconThemeData(size: 24),
+          ),
         ),
-        cardTheme: CardTheme(
-          elevation: 4,
-          margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        ),
-        appBarTheme: const AppBarTheme(
-          elevation: 0,
-          centerTitle: true,
-          backgroundColor: Colors.transparent,
-        ),
-        bottomNavigationBarTheme: BottomNavigationBarThemeData(
-          elevation: 8,
-          selectedItemColor: const Color(0xFF1D5C42),
-          unselectedItemColor: Colors.grey,
-          type: BottomNavigationBarType.fixed,
-          backgroundColor: Colors.white,
-          selectedIconTheme: const IconThemeData(size: 28),
-          unselectedIconTheme: const IconThemeData(size: 24),
-        ),
+        home: const DashboardScreen(),
       ),
-      home: const DashboardScreen(),
     );
   }
 }
@@ -68,7 +72,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   final List<Widget> _screens = [
     const HomeScreen(),
-    const TransactionsScreen(),
+    const TransactionFormScreen(),
     const BudgetScreen(),
     const SettingsScreen(),
   ];
@@ -89,10 +93,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
         selectedItemColor: Theme.of(context).colorScheme.primary,
         type: BottomNavigationBarType.fixed,
         items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.dashboard), label: "Home"),
-          BottomNavigationBarItem(icon: Icon(Icons.list), label: "Transactions"),
-          BottomNavigationBarItem(icon: Icon(Icons.account_balance_wallet), label: "Budget"),
-          BottomNavigationBarItem(icon: Icon(Icons.settings), label: "Settings"),
+          BottomNavigationBarItem(icon: Icon(Icons.dashboard), label: "Ana Sayfa"),
+          BottomNavigationBarItem(icon: Icon(Icons.add_circle_outline), label: "İşlem Ekle"),
+          BottomNavigationBarItem(icon: Icon(Icons.account_balance_wallet), label: "Bütçe"),
+          BottomNavigationBarItem(icon: Icon(Icons.settings), label: "Ayarlar"),
         ],
       ),
     );

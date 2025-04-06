@@ -31,7 +31,7 @@ dependencies:
   flutter:
     sdk: flutter
   syncfusion_flutter_charts: ^28.2.11
-  http: ^0.13.4
+  http: ^1.3.0
   cupertino_icons: ^1.0.8
   flutter_launcher_icons: ^0.14.3
   shared_preferences: ^2.2.2  # For local storage
@@ -40,6 +40,8 @@ dependencies:
   fl_chart: ^0.66.2  # For beautiful charts
   local_auth: ^2.1.8  # For biometric authentication
   notification_permissions: ^0.6.1  # For notification handling
+  google_fonts: ^6.1.0
+  flutter_animate: ^4.5.0
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -91,12 +93,14 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
+  fonts:
+    - family: Poppins
+      fonts:
+        - asset: assets/fonts/Poppins-Regular.ttf
+        - asset: assets/fonts/Poppins-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Poppins-Bold.ttf
+          weight: 700
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf

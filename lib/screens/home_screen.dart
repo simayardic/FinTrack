@@ -1,85 +1,149 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:provider/provider.dart';
+import 'package:flutter_animate/flutter_animate.dart';
+import 'package:google_fonts/google_fonts.dart';
+import '../providers/transaction_provider.dart';
+import '../utils/utils.dart';
+import 'transaction_form_screen.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
-
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  late double exchangeRateUSD = 0.0; // USD to TRY rate
-  late double exchangeRateEUR = 0.0; // EUR to TRY rate
-
-  @override
-  void initState() {
-    super.initState();
-    fetchExchangeRates(); // API'den döviz kuru bilgisi al
-  }
-
-  // API'den döviz kuru bilgisini çekme
-  Future<void> fetchExchangeRates() async {
-    final response = await http.get(Uri.parse('https://api.exchangerate-api.com/v4/latest/USD'));
-
-    if (response.statusCode == 200) {
-      // API'den gelen veriyi çözümle
-      var data = json.decode(response.body);
-      setState(() {
-        exchangeRateUSD = data['rates']['TRY']; // USD'den TRY'ye döviz kuru
-        exchangeRateEUR = data['rates']['EUR'] * exchangeRateUSD; // EUR to TRY = EUR to USD * USD to TRY
-      });
-    } else {
-      throw Exception('Veri çekilemedi');
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Dashboard"),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Döviz kuru bilgisi
-            const Text("Döviz Kurları", style: TextStyle(fontSize: 18)),
-            const SizedBox(height: 10),
-            // USD to TRY
-            exchangeRateUSD > 0
-                ? Text(
-                    "1 USD = ${exchangeRateUSD.toStringAsFixed(2)} TRY",
-                    style: TextStyle(fontSize: 18, color: Colors.blue, fontWeight: FontWeight.bold),
-                  )
-                : const CircularProgressIndicator(),
-            const SizedBox(height: 10),
-            // EUR to TRY
-            exchangeRateEUR > 0
-                ? Text(
-                    "1 EUR = ${exchangeRateEUR.toStringAsFixed(2)} TRY",
-                    style: TextStyle(fontSize: 18, color: Colors.green, fontWeight: FontWeight.bold),
-                  )
-                : const CircularProgressIndicator(),
-            const SizedBox(height: 20),
-            // Aylık ve Yıllık Gelir-Gider
-            const Text("Aylık Gelir: \$3000", style: TextStyle(fontSize: 18)),
-            const Text("Aylık Gider: \$1500", style: TextStyle(fontSize: 18)),
-            const SizedBox(height: 20),
-            // Kategorilere Göre Gelir ve Gider
-            ElevatedButton(
-              onPressed: () {
-                // Kategorilere gitmek için nav açılır
-              },
-              child: const Text("Kategorilere Göre Görüntüle"),
-            ),
-            const SizedBox(height: 20),
-            // Grafik (örneğin PieChart) ekleyebiliriz
-          ],
+        title: Text(
+          'FinTrack',
+          style: GoogleFonts.poppins(
+            fontWeight: FontWeight.bold,
+            fontSize: 24,
+          ),
         ),
+      ),
+      body: Consumer<TransactionProvider>(
+        builder: (context, provider, child) {
+          final totalBalance = provider.getTotalBalance();
+          
+          return SingleChildScrollView(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Card(
+                  child: Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Toplam Bakiye',
+                          style: GoogleFonts.poppins(
+                            fontSize: 16,
+                            color: Colors.grey[600],
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                          Utils.formatCurrency(totalBalance),
+                          style: GoogleFonts.poppins(
+                            fontSize: 32,
+                            fontWeight: FontWeight.bold,
+                            color: totalBalance >= 0 ? Colors.green : Colors.red,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ).animate().fadeIn().slideX(),
+                const SizedBox(height: 24),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Son İşlemler',
+                      style: GoogleFonts.poppins(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    TextButton.icon(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const TransactionFormScreen(),
+                          ),
+                        );
+                      },
+                      icon: const Icon(Icons.add),
+                      label: const Text('Yeni İşlem'),
+                    ),
+                  ],
+                ).animate().fadeIn().slideX(),
+                const SizedBox(height: 16),
+                if (provider.transactions.isEmpty)
+                  Center(
+                    child: Text(
+                      'Henüz işlem bulunmuyor',
+                      style: GoogleFonts.poppins(
+                        color: Colors.grey[600],
+                      ),
+                    ),
+                  ).animate().fadeIn()
+                else
+                  ListView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: provider.transactions.length,
+                    itemBuilder: (context, index) {
+                      final transaction = provider.transactions[index];
+                      return Card(
+                        child: ListTile(
+                          leading: CircleAvatar(
+                            backgroundColor: transaction.type == 'income'
+                                ? Colors.green[100]
+                                : Colors.red[100],
+                            child: Icon(
+                              transaction.type == 'income'
+                                  ? Icons.arrow_downward
+                                  : Icons.arrow_upward,
+                              color: transaction.type == 'income'
+                                  ? Colors.green
+                                  : Colors.red,
+                            ),
+                          ),
+                          title: Text(
+                            transaction.title,
+                            style: GoogleFonts.poppins(
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          subtitle: Text(
+                            transaction.category,
+                            style: GoogleFonts.poppins(
+                              color: Colors.grey[600],
+                            ),
+                          ),
+                          trailing: Text(
+                            Utils.formatCurrency(transaction.amount),
+                            style: GoogleFonts.poppins(
+                              fontWeight: FontWeight.bold,
+                              color: transaction.type == 'income'
+                                  ? Colors.green
+                                  : Colors.red,
+                            ),
+                          ),
+                        ),
+                      ).animate().fadeIn().slideX();
+                    },
+                  ),
+              ],
+            ),
+          );
+        },
       ),
     );
   }
