@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 import 'package:provider/provider.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../providers/transaction_provider.dart';
 import '../utils/utils.dart';
-import 'transaction_form_screen.dart';
+import '../screens/transaction_form_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -22,6 +20,12 @@ class HomeScreen extends StatelessWidget {
             fontSize: 24,
           ),
         ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.add_circle_outline, size: 28),
+            onPressed: () => _showAddTransactionSheet(context),
+          ),
+        ],
       ),
       body: Consumer<TransactionProvider>(
         builder: (context, provider, child) {
@@ -59,29 +63,12 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ).animate().fadeIn().slideX(),
                 const SizedBox(height: 24),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Son İşlemler',
-                      style: GoogleFonts.poppins(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    TextButton.icon(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const TransactionFormScreen(),
-                          ),
-                        );
-                      },
-                      icon: const Icon(Icons.add),
-                      label: const Text('Yeni İşlem'),
-                    ),
-                  ],
+                Text(
+                  'Son İşlemler',
+                  style: GoogleFonts.poppins(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ).animate().fadeIn().slideX(),
                 const SizedBox(height: 16),
                 if (provider.transactions.isEmpty)
@@ -144,6 +131,22 @@ class HomeScreen extends StatelessWidget {
             ),
           );
         },
+      ),
+    );
+  }
+
+  void _showAddTransactionSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (context) => Container(
+        height: MediaQuery.of(context).size.height * 0.85,
+        decoration: const BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+        ),
+        child: const TransactionFormScreen(),
       ),
     );
   }

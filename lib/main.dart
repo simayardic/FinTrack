@@ -5,7 +5,6 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'screens/home_screen.dart';
 import 'screens/settings_screen.dart';
 import 'screens/budget_screen.dart';
-import 'screens/transaction_form_screen.dart';
 import 'models/budget.dart';
 import 'providers/budget_provider.dart';
 import 'providers/transaction_provider.dart';
@@ -70,11 +69,28 @@ class DashboardScreen extends StatefulWidget {
 class _DashboardScreenState extends State<DashboardScreen> {
   int _selectedIndex = 0;
 
-  final List<Widget> _screens = [
-    const HomeScreen(),
-    const TransactionFormScreen(),
-    const BudgetScreen(),
-    const SettingsScreen(),
+  static const List<Widget> _screens = [
+    HomeScreen(),
+    BudgetScreen(),
+    SettingsScreen(),
+  ];
+
+  static const List<BottomNavigationBarItem> _navItems = [
+    BottomNavigationBarItem(
+      icon: Icon(Icons.home_outlined),
+      activeIcon: Icon(Icons.home),
+      label: "Ana Sayfa"
+    ),
+    BottomNavigationBarItem(
+      icon: Icon(Icons.account_balance_wallet_outlined),
+      activeIcon: Icon(Icons.account_balance_wallet),
+      label: "Bütçe"
+    ),
+    BottomNavigationBarItem(
+      icon: Icon(Icons.settings_outlined),
+      activeIcon: Icon(Icons.settings),
+      label: "Ayarlar"
+    ),
   ];
 
   void _onItemTapped(int index) {
@@ -86,18 +102,16 @@ class _DashboardScreenState extends State<DashboardScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _screens[_selectedIndex],
+      body: IndexedStack(
+        index: _selectedIndex,
+        children: _screens,
+      ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
         selectedItemColor: Theme.of(context).colorScheme.primary,
         type: BottomNavigationBarType.fixed,
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.dashboard), label: "Ana Sayfa"),
-          BottomNavigationBarItem(icon: Icon(Icons.add_circle_outline), label: "İşlem Ekle"),
-          BottomNavigationBarItem(icon: Icon(Icons.account_balance_wallet), label: "Bütçe"),
-          BottomNavigationBarItem(icon: Icon(Icons.settings), label: "Ayarlar"),
-        ],
+        items: _navItems,
       ),
     );
   }

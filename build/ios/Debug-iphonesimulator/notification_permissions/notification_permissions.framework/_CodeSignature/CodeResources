@@ -10,7 +10,7 @@
 		</data>
 		<key>Headers/notification_permissions-Swift.h</key>
 		<data>
-		HbatK7E9grzwGC+oDjbGfdo3acY=
+		a9n4/WmoTo2+YHfFEsS05Wge/W0=
 		</data>
 		<key>Headers/notification_permissions-umbrella.h</key>
 		<data>
@@ -18,7 +18,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		HGzgAvZDJfsIkIMGTtqS643Di7M=
+		LspnpKhZ2TWsXxVBI01EDxyRNd0=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -26,11 +26,11 @@
 		</data>
 		<key>Modules/notification_permissions.swiftmodule/Project/arm64-apple-ios-simulator.swiftsourceinfo</key>
 		<data>
-		b0vzL7FVrA7P3BpvtHKSjLVwvpo=
+		yUDU4FDiuHW0u9Kd8+PjNhbu+vo=
 		</data>
 		<key>Modules/notification_permissions.swiftmodule/Project/x86_64-apple-ios-simulator.swiftsourceinfo</key>
 		<data>
-		vNoM4muWOH3gF3R3mEFv6gigXmY=
+		YinkCClfBMqNZWa+DLsoBS9OBGw=
 		</data>
 		<key>Modules/notification_permissions.swiftmodule/arm64-apple-ios-simulator.abi.json</key>
 		<data>
@@ -38,11 +38,11 @@
 		</data>
 		<key>Modules/notification_permissions.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
 		<data>
-		ZGarfiKs6cWS4bPvm/00hXNxtjQ=
+		22zUGD/jLBVFTu5ZKS5XgQCZTrU=
 		</data>
 		<key>Modules/notification_permissions.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		ep7i9EVL3uBK/GxTlNMBO+zQCcI=
+		PQwqOl2p7mBaVyL5t3PKKJOeqqQ=
 		</data>
 		<key>Modules/notification_permissions.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<data>
@@ -50,11 +50,11 @@
 		</data>
 		<key>Modules/notification_permissions.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<data>
-		20tSOYEHhf31wogrw4MUHS8oBUc=
+		oaozrT0pFSG3sGGl+Khnct9d5vc=
 		</data>
 		<key>Modules/notification_permissions.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		cLt0/PRJBx1Ge73CcgwuwPxHhZY=
+		84FFjMFkIIeTCEsYsRuWaXz7Fys=
 		</data>
 	</dict>
 	<key>files2</key>
@@ -70,7 +70,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			SyuE6Y6Q8cg5q/31C9dgXLHs5+PDm3ceye3Chyonim0=
+			v32c3gR0/K77Uh4i7z/TDBZKZ26I+pnf/ictf8yUw6s=
 			</data>
 		</dict>
 		<key>Headers/notification_permissions-umbrella.h</key>
@@ -91,14 +91,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			n0C0+e1+RPR+uXNbWz+7tkDbDPnmoNwkIilK4l6IWg4=
+			1Gkd92lFels70NEuBE6AaZFGRuqqGuYU+30CYNXH9CU=
 			</data>
 		</dict>
 		<key>Modules/notification_permissions.swiftmodule/Project/x86_64-apple-ios-simulator.swiftsourceinfo</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			RHQkjZ0IbwB+R1OtpUFFj96MUKJbZyWhh5bOPZcXSxw=
+			zD2+wxKsT1AOfP9zVPlw7ZBIhmWWg7ko+CCcyyo2jFs=
 			</data>
 		</dict>
 		<key>Modules/notification_permissions.swiftmodule/arm64-apple-ios-simulator.abi.json</key>
@@ -112,14 +112,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			RkRYLZXSG3iytQPVWnUnq+IgxjuLTNFAdmUhYl9s/2Y=
+			zI3HYa7q2bxpmRB6oKEBaCCMIm7IGE9Nrpzb0ZHwXJw=
 			</data>
 		</dict>
 		<key>Modules/notification_permissions.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			VknYpmOV7XFS9WcDg4cUu23JK+Qe1fvlaJEqgQwXKuU=
+			Mfdo1fFQw/teP6a2DHdlWpO5F12TQgKoe08MHXC0DzE=
 			</data>
 		</dict>
 		<key>Modules/notification_permissions.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
@@ -133,14 +133,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			kecU8qxdOuttnG7zUNv1iAIUc+75kYOyy3M43XJdfWY=
+			nsb5oflLHNa7u8ZpPp7qUerVMR2S2Or1Oroja5SgzAw=
 			</data>
 		</dict>
 		<key>Modules/notification_permissions.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			+nlLh1OHMUMJuvqCkCj0IeUFU7LByyw9kv6YqQMHAIw=
+			bcaJDxYKNZhPzGaHaBH9SmxbxanJKzNCXaM1Oj+hD3c=
 			</data>
 		</dict>
 	</dict>

@@ -20,9 +20,8 @@ class BudgetProvider with ChangeNotifier {
     return _budgets.fold(0, (sum, budget) => sum + budget.spent);
   }
 
-  void addBudget(Budget budget) {
-    _budgets.add(budget);
-    notifyListeners();
+  double getTotalBudget() {
+    return _budgets.fold(0, (sum, budget) => sum + budget.limit);
   }
 
   void updateBudget(Budget budget) {
